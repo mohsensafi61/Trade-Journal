@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# پنل سیستم معاملاتی
 
-## Getting Started
+وب‌اپلیکیشن مدیریت سیستم معاملاتی با Next.js + Supabase.
 
-First, run the development server:
+## قابلیت‌ها
+
+- ✅ **احراز هویت**: Email/Password + Magic Link + OAuth (Google)
+- ✅ **چک‌لیست روزانه**: ۴ دسته ورودی (بدنی/فکری/اطلاعاتی/قوانین)
+- ✅ **سیستم معاملاتی**: ذخیره قوانین ثابت
+- ✅ **ممنوعیت‌ها**: لیست کارهای ممنوعه
+- ✅ **ژورنال**: ثبت معاملات با بعد روانی و اطلاعاتی
+- ✅ **آمار و روند**: نرخ برد، پایبندی، ارزیابی سیستمی
+- ✅ **RLS**: هر کاربر فقط داده‌های خودش
+- ✅ **RTL + تم تیره**: با فونت وزیرمتر
+
+## راه‌اندازی
+
+### ۱. نصب وابستگی‌ها
+
+```bash
+npm install
+```
+
+### ۲. راه‌اندازی Supabase
+
+```bash
+# نصب Supabase CLI (اگر نداری)
+npm i -g supabase
+
+# راه‌اندازی محلی
+supabase init
+supabase start
+
+# یا ایجاد پروژه ابری در https://supabase.com
+```
+
+### ۳. تنظیم متغیرهای محیطی
+
+`.env.local` رو با اطلاعات پروژه Supabase پر کن:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://PROJECT_ID.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_ANON_KEY
+SUPABASE_SERVICE_ROLE_KEY=YOUR_SERVICE_ROLE_KEY
+```
+
+### ۴. اجرای مایگریشن‌ها
+
+```bash
+supabase db reset  # برای محیط محلی
+# یا فایل‌های supabase/migrations/*.sql رو در Supabase Dashboard اجرا کن
+```
+
+### ۵. اجرای پروژه
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ساختار پروژه
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+├── app/
+│   ├── (auth)/         # صفحات احراز هویت
+│   ├── (app)/          # صفحات محافظت‌شده
+│   └── auth/callback/  # callback مسیر احراز هویت
+├── hooks/              # React hooks برای CRUD داده‌ها
+├── lib/                # Supabase client/server + ثابت‌ها
+└── types/              # Type‌های TypeScript
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## دیپلوی
 
-## Learn More
+### Vercel (پیشنهادی)
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+پروژه رو به Vercel متصل کن و متغیرهای محیطی رو در Vercel Dashboard تنظیم کن.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## تکنولوژی‌ها
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Next.js 15](https://nextjs.org/)
+- [Supabase](https://supabase.com/)
+- [Tailwind CSS 4](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vazirmatn Font](https://fontsource.org/fonts/vazirmatn)
